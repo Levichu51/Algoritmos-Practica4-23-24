@@ -1,0 +1,67 @@
+Cuarta práctica de algoritmos. Algoritmo Dijkstra.
+A 23 de noviembre de 2023
+
+Autores de la práctica:
+- Levi Barros García
+- Raúl Meijide Couto 
+- Ángel Villamor Martínez
+
+
+- Introducción:
+
+En esta práctica vamos a realizar el estudio de la complejidad computacional a partir de la matriz de adyacencia de un grafo con la utilizacion del algoritmo dijkstra para el calculo de las distancias mínimas.
+
+
+
+El algoritmo de Dijkstra es un método utilizado en teoría de grafos para encontrar el camino más corto entre un vértice de origen y todos los demás vértices en un grafo con pesos en las aristas. Este algoritmo mantiene y actualiza una lista de distancias mínimas desde el vértice de origen a cada uno de los demás vértices. Comienza asignando una distancia infinita a todos los vértices excepto al vértice de origen, al cual se le asigna una distancia de cero. Luego, en cada iteración, selecciona el vértice con la distancia mínima no procesada, y actualiza las distancias de sus vecinos si se puede alcanzar a través de un camino más corto. Este proceso continúa hasta que se han procesado todos los vértices o hasta que se alcance el vértice de destino, si se especifica.
+
+A partir de la implementación del algoritmo Dijkstras en lenguaje C, hemos desarrollado las operaciones necesarias para manipular grafos ponderados, incluyendo la inicialización de matrices, la generación de grafos aleatorios y la ejecución del algoritmo de Dijkstra para encontrar los caminos más cortos entre nodos. Además, hemos verificado la corrección de estas operaciones mediante la realización de pruebas que involucran la creación de grafos de ejemplo y la aplicación del algoritmo de Dijkstra para obtener las distancias mínimas entre nodos.
+
+
+Los tiempos de ejecución los hemos medido en microsegundos. En el caso de los tiempos menores de 500 microsegundos, hemos aplicado el habitual método de medición que aplicamos para los tiempos pequeños, que consistente en tomar el tiempo medio de 100 mediciones.
+
+
+
+
+- Máquina de medición:
+
+- Sistema Operativo: Linux 5.15.0-84-generic
+- Procesador: Intel(r) Core(tm) i5-8300H CPU @ 2.30GHz × 8
+- Memoria Ram: 8 GB DDR4
+- Tarjeta Gráfica: NVIDIA Corporation GP107M [GeForce GTX 1050 Mobile]
+- Arquitectura Hardware: x86_64
+- Kernel: #93~20.04.1-Ubuntu SMP 
+
+
+Tabla de tiempos en microsegundos obtenida para la demostracion de la busqueda del camino mínimo con el algoritmo dijkstra:
+Índice:
+- n: el tamaño de los vectores
+- t(n): son los tiempos   
+- n ^ 2.6: es la cota subestimada
+- n^2.82: es la cota ajustada 
+- n ^ 3: es la cota sobrestimada
+- *: Indica que el tiempo de ejecución del vector fue menor que 500 ms y se hizo la media de los tiempos de ese vector ejecutado 100 veces.
+- #: Mediciones anómalas
+
+Análisis de la complejidad de Dijkstra
+	       n			  t(n)		   t(n) / n^2.6		   t(n) / n^2.82	   t(n) / n^3
+(*)	      10		         20.570		    0.05166950		    0.03113395		    0.02057000
+(*)	      20		        149.120		    0.06178142		    0.03196181		    0.01864000
+	      40		       1035.000		    0.07072686		    0.03141457		    0.01617187
+	      80		       7240.000		    0.08160271		    0.03111894		    0.01414063
+	     160		      51436.000		    0.09562143		    0.03130753		    0.01255762
+(#)	     320		     414054.000		    0.12696004		    0.03568897		    0.01263593
+(#)	     640		    3499900.000		    0.17700588		    0.04271969		    0.01335106
+
+
+* Tabla: Realización del estudio de la complejidad la busqueda del camino minimo con el algoritmo dijkstra.
+
+- Discusión: Por lo tanto hemos detectado un par de anomalías en los cálculos de la complejidad que ocurre cuando utilizamos los arrays de tamaño 320 y 640 debido a la gestión de memoria de la máquina en la que hemos realizado las mediciones. A parte de esto hemos observado una ligera variación en la cota ajustada que es casi imperceptible ya que se mantiene en valores muy constantes, lo que provoca que no contenga ninguna anomalía más aparte de las que hemos indicado ya que para el resto de arrays sus valores están en el rango de la media. Se observa que la cota subestimada es creciente y que la sobreestimada es decreciente salvo para el array de 640 en el que vuelve a crecer ligeramente.
+
+Por otro lado, la cota ajustada tiende a la constante 0.031 lo que demuestra que su complejidad se va aproximando a O(n^2.82).
+
+
+- Conclusion: Como podemos observar los  tiempos de ejecución van aumentando considerablemente en función del array debido al tamaño de memoria que tiene la matriz, ya que la sucesion tiene un crecimiento exponencial con una razon de multiplicación de dos respecto al orden que tiene la matriz, lo que nos permite afirmar que tiene una progresión geométrica.
+Por lo tanto podemos observar que el algoritmo dijkstra es un algoritmo que con arrays de grandes dimensiones se disparan los tiempos de ejecución lo que lo combierte en un algoritmo con una utilidad muy costosa para estos casos que hemos mencionado.
+
+
